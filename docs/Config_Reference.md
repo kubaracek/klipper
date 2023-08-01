@@ -2570,10 +2570,11 @@ pin:
 #   enabled for extended periods, while a value of 0.5 would allow the
 #   pin to be enabled for no more than half the time. This setting may
 #   be used to limit the total power output (over extended periods) to
-#   the fan. If this value is less than 1.0 then fan speed requests
-#   will be scaled between zero and max_power (for example, if
-#   max_power is .9 and a fan speed of 80% is requested then the fan
-#   power will be set to 72%). The default is 1.0.
+#   the fan. This value will be used together with off_below setting to
+#   scale the value. When `off_below` is set to 0.3 and `max_power` is
+#   set to 1.0, the fan speed requests will be scaled proportionally
+#   between 0.3 (off_below) and 1.0 (max_power), requesting 10% of
+#   fan speed would result in a value of 0.37
 #shutdown_speed: 0
 #   The desired fan speed (expressed as a value from 0.0 to 1.0) if
 #   the micro-controller software enters an error state. The default
@@ -2595,10 +2596,7 @@ pin:
 #   spinning). The default is 0.100 seconds.
 #off_below: 0.0
 #   The minimum input speed which will power the fan (expressed as a
-#   value from 0.0 to 1.0). When a speed lower than off_below is
-#   requested the fan will instead be turned off. This setting may be
-#   used to prevent fan stalls and to ensure kick starts are
-#   effective. The default is 0.0.
+#   value from 0.0 to 1.0). The default is 0.0.
 #
 #   This setting should be recalibrated whenever max_power is adjusted.
 #   To calibrate this setting, start with off_below set to 0.0 and the
